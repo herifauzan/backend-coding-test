@@ -2,13 +2,13 @@
   "name": "backend-coding-test",
   "version": "1.0.0",
   "description": "A coding assessment for Xendit backend interviews",
-  "main": "index.js",
+  "main": "index.ts",
   "directories": {
     "test": "tests"
   },
   "scripts": {
     "test": "nyc mocha tests --timeout=3000",
-    "start": "node index.js"
+    "start": "tsc && node index.ts"
   },
   "keywords": [
     "Xendit"
@@ -28,9 +28,12 @@
     "yarn": "^1.17.3"
   },
   "devDependencies": {
+    "@types/express": "^4.17.0",
     "eslint": "^6.1.0",
     "mocha": "^6.2.0",
     "pre-push": "^0.1.1",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3"
   }
 }
