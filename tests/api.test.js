@@ -13,7 +13,6 @@ describe('API tests', () => {
             if (err) {
                 return done(err);
             }
-
             buildSchemas(db);
 
             done();
@@ -55,9 +54,6 @@ describe('API tests', () => {
                 .expect('Content-Type', /json/)
                 .expect(200, done);
         });
-    });
-
-    describe('POST /rides', () => {
         it('should return error with message start latitude or longitude validation error', (done) => {
             request(app)
                 .post('/rides')
