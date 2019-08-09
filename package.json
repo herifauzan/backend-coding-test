@@ -23,7 +23,8 @@
     "prepush": "^3.1.11",
     "sqlite3": "^4.0.6",
     "swagger-ui-express": "^4.0.7",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "yarn": "^1.17.3"
   },
   "devDependencies": {
     "eslint": "^6.1.0",
