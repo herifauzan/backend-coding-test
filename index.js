@@ -3,6 +3,7 @@
 const express = require('express');
 const app = express();
 const port = 8010;
+var cors  = require('cors');
 
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
@@ -16,6 +17,6 @@ db.serialize(() => {
     buildSchemas(db);
 
     const app = require('./src/app')(db);
-
+    app.use(cors());
     app.listen(port, () => console.log(`App started and listening on port ${port}`));
 });
