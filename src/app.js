@@ -10,7 +10,7 @@ const { createRide, getRides, getRideById } = require('./route');
 
 module.exports = (db) => {
     global.db = db;
-    app.get('/health', (res) => res.send('Healthy'));
+    app.get('/health', (req, res) => res.send('Healthy'));
 
     app.post('/rides', jsonParser, createRide);
 

@@ -1,0 +1,76 @@
+
+
+  API tests
+    GET /health
+      1) should return health
+    POST /rides
+      ✓ should return rides information with id 1
+      2) should return error with message start latitude or longitude validation error
+      3) should return error with message stop latitude or longitude validation error
+      4) should return error with message rider name validation error
+      5) should return error with message driver name validation error
+      6) should return error with message vehicle name validation error
+    GET /rides
+      ✓ should return all rides information
+      ✓ should return all rides skip 1
+      ✓ should return all rides limit 1
+      ✓ should return all rides limit 1 skip 1
+    GET /rides/1
+      ✓ should return rides information with id 1
+
+
+  6 passing (15s)
+  6 failing
+
+  1) API tests
+       GET /health
+         should return health:
+     Error: expected 200 "OK", got 500 "Internal Server Error"
+      at Test._assertStatus (node_modules/supertest/lib/test.js:268:12)
+      at Test._assertFunction (node_modules/supertest/lib/test.js:283:11)
+      at Test.assert (node_modules/supertest/lib/test.js:173:18)
+      at Server.localAssert (node_modules/supertest/lib/test.js:131:12)
+      at emitCloseNT (net.js:1671:8)
+      at _combinedTickCallback (internal/process/next_tick.js:135:11)
+      at process._tickCallback (internal/process/next_tick.js:180:9)
+
+  2) API tests
+       POST /rides
+         should return error with message start latitude or longitude validation error:
+     Error: Timeout of 3000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (/home/heri/Documents/Latihan/Xendit/tests/api.test.js)
+  
+
+  3) API tests
+       POST /rides
+         should return error with message stop latitude or longitude validation error:
+     Error: Timeout of 3000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (/home/heri/Documents/Latihan/Xendit/tests/api.test.js)
+  
+
+  4) API tests
+       POST /rides
+         should return error with message rider name validation error:
+     Error: Timeout of 3000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (/home/heri/Documents/Latihan/Xendit/tests/api.test.js)
+  
+
+  5) API tests
+       POST /rides
+         should return error with message driver name validation error:
+     Error: Timeout of 3000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (/home/heri/Documents/Latihan/Xendit/tests/api.test.js)
+  
+
+  6) API tests
+       POST /rides
+         should return error with message vehicle name validation error:
+     Error: Timeout of 3000ms exceeded. For async tests and hooks, ensure "done()" is called; if returning a Promise, ensure it resolves. (/home/heri/Documents/Latihan/Xendit/tests/api.test.js)
+  
+
+
+
+------------|----------|----------|----------|----------|-------------------|
+File        |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+------------|----------|----------|----------|----------|-------------------|
+All files   |    92.21 |    85.71 |      100 |    92.11 |                   |
+ app.js     |      100 |      100 |      100 |      100 |                   |
+ route.js   |       90 |    85.71 |      100 |       90 |... ,61,68,127,135 |
+ schemas.js |      100 |      100 |      100 |      100 |                   |
+------------|----------|----------|----------|----------|-------------------|

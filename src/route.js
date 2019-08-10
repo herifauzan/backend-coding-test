@@ -1,15 +1,33 @@
 module.exports = {
     createRide : async (req, res) => {
-        let result = await promiseCreate(req.body.start_lat, req.body.start_long, req.body.end_lat, req.body.end_long, req.body.rider_name, req.body.driver_name, req.body.driver_vehicle);
-        res.send(result);
+        try{
+            let result = await promiseCreate(req.body.start_lat, req.body.start_long, req.body.end_lat, req.body.end_long, req.body.rider_name, req.body.driver_name, req.body.driver_vehicle);
+            res.send(result);
+        }
+        catch(err){
+            res.send(err)
+        }
+       
     },
     getRides : async (req, res) => {
-        let result = await promiseGetAll(req.query.skip, req.query.limit);
-        res.send(result);
+        try{
+            let result = await promiseGetAll(req.query.skip, req.query.limit);
+            res.send(result);
+        }
+        catch(err){
+            res.send(err)
+        }
+        
     },
     getRideById : async (req, res) => {
-        let result = await promiseGetById(req.params.id);
-        res.send(result);
+        try{
+            let result = await promiseGetById(req.params.id);
+            res.send(result);
+        }
+        catch(err){
+            res.send(err)
+        }
+       
     }
 }
 function promiseGetAll(off, lim){
