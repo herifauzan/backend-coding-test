@@ -1,0 +1,199 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a simple server to create and get information about riding\
+    \ activity."
+  version: "1.0.0"
+  title: "Rides Information API"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8010"
+basePath: "/"
+tags:
+- name: "rides"
+  description: "Everything about rides information"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+schemes:
+- "https"
+- "http"
+paths:
+  /health:
+    get:
+      tags:
+      - "health"
+      summary: "Checking server health"
+      description: ""
+      operationId: "health"
+      consumes:
+      - "application/json"
+      produces:
+      - "text"
+      parameters: []
+      responses:
+        200:
+          description: "health"
+      x-swagger-router-controller: "Health"
+  /rides:
+    get:
+      tags:
+      - "rides"
+      summary: "Get all rides informations"
+      description: ""
+      operationId: "getRides"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "skip"
+        in: "query"
+        description: "skip under number"
+        required: false
+        type: "integer"
+        format: "int32"
+      - name: "limit"
+        in: "query"
+        description: "limit number of list"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/ListRide"
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "Rides"
+    post:
+      tags:
+      - "rides"
+      summary: "Add a new ride to the database"
+      description: ""
+      operationId: "addRide"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Ride object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Ride"
+      responses:
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "Rides"
+  /rides/{Id}:
+    get:
+      tags:
+      - "rides"
+      summary: "Find ride by ID"
+      description: "Returns a single ride information"
+      operationId: "getRideById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Id"
+        in: "path"
+        description: "ID of ride to return"
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ListRide"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pet not found"
+      x-swagger-router-controller: "Rides"
+definitions:
+  ListRide:
+    type: "array"
+    items:
+      $ref: "#/definitions/ListRide_inner"
+  Ride:
+    type: "object"
+    required:
+    - "driver_name"
+    - "end_lat"
+    - "end_long"
+    - "rider_name"
+    - "start_lat"
+    - "start_long"
+    properties:
+      start_lat:
+        type: "integer"
+        format: "int32"
+      start_long:
+        type: "integer"
+        format: "int32"
+      end_lat:
+        type: "integer"
+        format: "int32"
+      end_long:
+        type: "integer"
+        format: "int32"
+      rider_name:
+        type: "string"
+      driver_name:
+        type: "string"
+      driver_vehicle:
+        type: "string"
+    xml:
+      name: "Ride"
+    example:
+      driver_name: "driver_name"
+      start_long: 6
+      end_lat: 1
+      end_long: 5
+      rider_name: "rider_name"
+      start_lat: 0
+      driver_vehicle: "driver_vehicle"
+  ErrorMessage:
+    type: "object"
+    properties:
+      error_code:
+        type: "string"
+      messages:
+        type: "string"
+  ListRide_inner:
+    properties:
+      rideId:
+        type: "integer"
+        format: "int32"
+      startLat:
+        type: "integer"
+        format: "int32"
+      startLong:
+        type: "integer"
+        format: "int32"
+      endLat:
+        type: "integer"
+        format: "int32"
+      endLong:
+        type: "integer"
+        format: "int32"
+      riderName:
+        type: "string"
+      driverName:
+        type: "string"
+      driverVehicle:
+        type: "string"
+      created:
+        type: "string"
+        format: "date-time"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
