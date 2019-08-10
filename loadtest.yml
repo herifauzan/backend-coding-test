@@ -1,0 +1,35 @@
+config:
+  target: 'http://localhost:8010'
+  phases:
+    - duration: 30
+      arrivalRate: 20
+  ensure:
+    p99: 50
+  defaults:
+    headers:
+      x-my-service-auth: '987401838271002188298567'
+scenarios:
+  - flow:
+    - get:
+        url: "/health"
+    - post:
+        url: "/rides"
+        json:
+          start_lat: 0
+          end_lat: 10
+          start_long: 0
+          end_long: 11
+          rider_name: "Malaikat"
+          driver_name: "Maut"
+          driver_vehicle: "Keranda Mayat"
+    - get:
+        url: "/rides"
+    - get:
+        url: "/rides/1"
+    - get:
+        url: "/rides?skip=1"
+    - get:
+        url: "/rides?limit=1"
+    - get:
+        url: "/rides?limit=1&skip=1"
+ 
