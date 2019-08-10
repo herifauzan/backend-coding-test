@@ -35,45 +35,49 @@ function promiseGetAll(off, lim){
         var offset = 0
         var limit  = 2
         var query  = 'SELECT * FROM Rides ORDER BY rideId'
-        try{
-            if(lim){
-                limit  = parseInt(lim)
-                query = query + ' LIMIT '+limit
-                if(off){
-                    offset = parseInt(off)
-                    query = query + ' OFFSET '+offset
-                }
+        if(parseInt(lim)){
+            limit  = parseInt(lim)
+            query = query + ' LIMIT '+limit
+            if(parseInt(off)){
+                offset = parseInt(off)
+                query = query + ' OFFSET '+offset
             }
-            else{
-                if(off){
-                    offset = parseInt(off)
-                    query = query + ' LIMIT -1 OFFSET '+offset
-                }
-            }            
         }
-        finally{
-            db.all(query, function (err, rows) {
-                if (err) {
-                    reject({
-                        error_code: 'SERVER_ERROR',
-                        message: 'Unknown error'
-                    });
-                }
+        else{
+            if(parseInt(off)){
+                offset = parseInt(off)
+                query = query + ' LIMIT -1 OFFSET '+offset
+            }
+        }     
+        
+        db.all(query, function (err, rows) {
+            if (err) {
+                reject({
+                    error_code: 'SERVER_ERROR',
+                    message: 'Unknown error'
+                });
+            }
 
-                if (rows.length === 0) {
-                    reject({
-                        error_code: 'RIDES_NOT_FOUND_ERROR',
-                        message: 'Could not find any rides'
-                    });
-                }
+            if (rows.length === 0) {
+                reject({
+                    error_code: 'RIDES_NOT_FOUND_ERROR',
+                    message: 'Could not find any rides'
+                });
+            }
 
-                resolve(rows);
-            });
-        }
+            resolve(rows);
+        });
+        
     })
 }
 function promiseGetById(id){
     return new Promise((resolve,reject)=>{
+        if(!parseInt(id)){
+            reject({
+                error_code: 'RIDES_NOT_FOUND_ERROR',
+                message: 'Could not find any rides'
+            });
+        }
         db.all('SELECT * FROM Rides WHERE rideID='+id, function (err, rows) {
             if (err) {
                 reject({
