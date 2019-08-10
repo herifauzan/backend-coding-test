@@ -72,29 +72,32 @@ function promiseGetAll(off, lim){
 }
 function promiseGetById(id){
     return new Promise((resolve,reject)=>{
-        if(!parseInt(id)){
-            reject({
-                error_code: 'RIDES_NOT_FOUND_ERROR',
-                message: 'Could not find any rides'
+        if(parseInt(id)){
+            db.all('SELECT * FROM Rides WHERE rideID='+id, function (err, rows) {
+                if (err) {
+                    reject({
+                        error_code: 'SERVER_ERROR',
+                        message: 'Unknown error'
+                    });
+                }
+    
+                if (rows.length === 0) {
+                    reject({
+                        error_code: 'RIDES_NOT_FOUND_ERROR',
+                        message: 'Could not find any rides'
+                    });
+                }
+    
+                resolve(rows);
             });
         }
-        db.all('SELECT * FROM Rides WHERE rideID='+id, function (err, rows) {
-            if (err) {
-                reject({
-                    error_code: 'SERVER_ERROR',
-                    message: 'Unknown error'
-                });
-            }
-
-            if (rows.length === 0) {
-                reject({
-                    error_code: 'RIDES_NOT_FOUND_ERROR',
-                    message: 'Could not find any rides'
-                });
-            }
-
-            resolve(rows);
-        });
+        else{
+            reject({
+                error_code: 'RIDES_NOT_FOUND_ERROR',
+                message: 'Input id is not a number'
+            });
+        }
+        
     })
 }
 function promiseCreate(startLat, startLong,endLat, endLong, rdrName, drvName, vehicleName){
