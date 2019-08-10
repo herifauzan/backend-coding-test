@@ -28,24 +28,6 @@ describe('API tests', () => {
         });
     });
 
-    describe('GET /rides', () => {
-        it('should return all rides information', (done) => {
-            request(app)
-                .get('/rides')
-                .expect('Content-Type', /json/)
-                .expect(200, done);
-        });
-    });
-
-    describe('GET /rides/1', () => {
-        it('should return rides information with id 1', (done) => {
-            request(app)
-                .get('/rides/1')
-                .expect('Content-Type', /json/)
-                .expect(200, done);
-        });
-    }); 
-
     describe('POST /rides', () => {
         it('should return rides information with id 1', (done) => {
             request(app)
@@ -90,4 +72,40 @@ describe('API tests', () => {
                 .expect(200, done);
         });
     });
+
+    describe('GET /rides', () => {
+        it('should return all rides information', (done) => {
+            request(app)
+                .get('/rides')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+        it('should return all rides skip 1', (done) => {
+            request(app)
+                .get('/rides?skip=1')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+        it('should return all rides limit 1', (done) => {
+            request(app)
+                .get('/rides?limit=1')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+        it('should return all rides limit 1 skip 1', (done) => {
+            request(app)
+                .get('/rides?limit=1&skip=1')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+    });
+
+    describe('GET /rides/1', () => {
+        it('should return rides information with id 1', (done) => {
+            request(app)
+                .get('/rides/1')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+    }); 
 });
