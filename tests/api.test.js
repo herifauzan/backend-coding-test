@@ -107,5 +107,11 @@ describe('API tests', () => {
                 .expect('Content-Type', /json/)
                 .expect(200, done);
         });
+        it('ensuring vulnerability with non-integer id', (done) => {
+            request(app)
+                .get('/rides/a')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
     }); 
 });
