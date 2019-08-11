@@ -65,6 +65,22 @@
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "skip under number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "limit number of list",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -83,7 +99,7 @@
         ],
         "summary": "Add a new ride to the database",
         "description": "",
-        "operationId": "addPet",
+        "operationId": "addRide",
         "consumes": [
           "application/json"
         ],
@@ -94,7 +110,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Pet object that needs to be added to the store",
+            "description": "Ride object that needs to be added to the store",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Ride"
